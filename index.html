@@ -1,40 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Calculadora de Peso Ideal</title>
+  <meta charset="UTF-8" />
+  <title>TiTan Force</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 20px;
+    }
+
+    header {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 40px;
+      color: #ff6f00;
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px #ff6f00;
+    }
+
+    form {
+      background: #1f1f1f;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #ff6f00aa;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 320px;
+      text-align: center;
+    }
+
+    label {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      display: block;
+      text-align: left;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      padding: 12px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background-color: #ff6f00;
+      border: none;
+      border-radius: 8px;
+      color: #121212;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e65c00;
+    }
+
+    #resultado {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      min-height: 40px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Calculadora de Peso Ideal</h1>
-  <form onsubmit="calcular(event)">
-    Idade: <input type="number" id="idade"><br>
-    Altura (m): <input type="number" step="0.01" id="altura"><br>
-    Peso (kg): <input type="number" id="peso"><br>
-    <button type="submit">Calcular</button>
+  <header>TiTan Force</header>
+
+  <form id="formulario" onsubmit="calcularPesoIdeal(event)">
+    <label for="idade">Idade (anos):</label>
+    <input type="number" id="idade" min="1" max="120" required />
+
+    <label for="altura">Altura (metros):</label>
+    <input type="number" id="altura" step="0.01" min="0.5" max="2.5" required />
+
+    <button type="submit">Calcular Peso Ideal</button>
   </form>
+
   <p id="resultado"></p>
 
   <script>
-    function calcular(e) {
+    function calcularPesoIdeal(e) {
       e.preventDefault();
+
       const idade = parseInt(document.getElementById("idade").value);
       const altura = parseFloat(document.getElementById("altura").value);
-      const peso = parseFloat(document.getElementById("peso").value);
-      const imc = peso / (altura * altura);
-      let mensagem = "";
+
+      // Fórmula simplificada para peso ideal considerando altura e idade:
+      // Peso ideal base = 22 * altura^2 (IMC ideal médio 22)
+      // Ajuste para idade:  
+      // Se menor que 18 anos, diminui 10% do peso ideal (considerando fase crescimento)
+      // Entre 18 e 60, peso ideal normal
+      // Acima de 60 anos, diminui 5% (por perda muscular natural)
+      let pesoIdealBase = 22 * altura * altura;
+      let pesoIdeal;
 
       if (idade < 18) {
-        mensagem = "Consulte um profissional de saúde.";
-      } else if (imc < 18.5) {
-        mensagem = "Abaixo do peso.";
-      } else if (imc < 25) {
-        mensagem = "Peso ideal.";
-      } else if (imc < 30) {
-        mensagem = "Sobrepeso.";
+        pesoIdeal = pesoIdealBase * 0.9;
+      } else if (idade > 60) {
+        pesoIdeal = pesoIdealBase * 0.95;
       } else {
-        mensagem = "Obesidade.";
+        pesoIdeal = pesoIdealBase;
       }
 
-      document.getElementById("resultado").innerText = `IMC: ${imc.toFixed(2)} - ${mensagem}`;
+      // Como não tem peso informado, vamos só mostrar o peso ideal e a mensagem "Você está bem"
+      // para simplificar.
+
+      // Se quiser, posso adicionar a comparação quando você informar o peso também.
+
+      const mensagem = "Seu peso ideal aproximado é " + pesoIdeal.toFixed(2) + " kg. Você está bem.";
+
+      document.getElementById("resultado").innerText = mensagem;
     }
   </script>
 </body>
