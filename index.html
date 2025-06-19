@@ -18,7 +18,7 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-      color: #f0f0f0;
+      color: #8B0000; /* vermelho escuro */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -36,12 +36,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(
-          circle at 20% 30%,
-          rgba(255, 0, 0, 0.1) 0%,
-          transparent 40%
-        ),
-        radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 40%);
+      background: none; /* sem neons */
       z-index: -1;
     }
 
@@ -58,13 +53,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 40px;
+      gap: 50px;
       margin-bottom: 20px;
     }
 
     .logo-img {
-      width: 150px;
-      height: 150px;
+      width: 220px;
+      height: 220px;
       object-fit: contain;
       border-radius: 0;
       border: none;
@@ -82,25 +77,29 @@
       white-space: nowrap;
       display: flex;
       gap: 0.1em;
+      color: #8B0000; /* vermelho escuro */
+      text-shadow: none;
     }
 
-    /* Estilo para letras T vermelhas */
+    /* Letras T em vermelho mais claro */
     .title span {
-      color: white;
+      color: #8B0000; /* vermelho escuro */
     }
     .title span.t {
-      color: #ff0000;
+      color: #FF4500; /* vermelho alaranjado mais claro */
+      font-weight: 900;
     }
 
     .subtitle {
       font-size: 1.5rem;
-      color: #ffd700;
+      color: #8B0000; /* vermelho escuro */
       text-align: center;
       max-width: 600px;
       line-height: 1.6;
       margin-bottom: 40px;
       margin-top: 0;
       width: 100%;
+      text-shadow: none;
     }
 
     .content {
@@ -115,28 +114,30 @@
       background: rgba(30, 30, 30, 0.8);
       padding: 40px;
       border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+      box-shadow: none; /* sem sombra */
       width: 450px;
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 215, 0, 0.3);
+      border: 1px solid rgba(139, 0, 0, 0.3); /* borda vermelho escuro */
+      color: #8B0000;
     }
 
     .info-section {
       background: rgba(30, 30, 30, 0.8);
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+      box-shadow: none;
       width: 450px;
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 215, 0, 0.3);
+      border: 1px solid rgba(139, 0, 0, 0.3);
+      color: #8B0000;
     }
 
     .section-title {
       font-size: 1.8rem;
-      color: #ffffff; /* branco */
+      color: #8B0000; /* vermelho escuro */
       margin-bottom: 25px;
       text-align: center;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      text-shadow: none;
       position: relative;
       padding-bottom: 10px;
     }
@@ -149,7 +150,7 @@
       transform: translateX(-50%);
       width: 80px;
       height: 3px;
-      background: linear-gradient(to right, #ff0000, #ffd700);
+      background: linear-gradient(to right, #8B0000, #FF4500);
       border-radius: 3px;
     }
 
@@ -161,7 +162,7 @@
       display: block;
       font-size: 1.1rem;
       margin-bottom: 10px;
-      color: #ffd700;
+      color: #FF4500; /* vermelho mais claro para labels */
     }
 
     input[type='number'] {
@@ -177,8 +178,8 @@
     }
 
     input[type='number']:focus {
-      border-color: #ff0000;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      border-color: #FF4500;
+      box-shadow: none;
     }
 
     button {
@@ -186,22 +187,22 @@
       padding: 16px;
       font-size: 1.2rem;
       font-weight: bold;
-      background: linear-gradient(135deg, #ff0000 0%, #b22222 100%);
+      background: linear-gradient(135deg, #8B0000 0%, #FF4500 100%);
       border: none;
       border-radius: 8px;
-      color: #ffd700;
+      color: #fff;
       cursor: pointer;
       transition: all 0.3s ease;
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-top: 10px;
-      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+      box-shadow: none;
     }
 
     button:hover {
-      background: linear-gradient(135deg, #ff4500 0%, #8b0000 100%);
+      background: linear-gradient(135deg, #FF4500 0%, #8B0000 100%);
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 0, 0, 0.6);
+      box-shadow: none;
     }
 
     button:active {
@@ -216,9 +217,10 @@
       background: rgba(20, 20, 20, 0.7);
       border-radius: 10px;
       padding: 20px;
-      border-left: 4px solid #ffd700;
-      color: #ffd700;
+      border-left: 4px solid #FF4500;
+      color: #FF4500;
       line-height: 1.6;
+      text-shadow: none;
     }
 
     .info-content {
@@ -234,33 +236,34 @@
       padding: 15px;
       background: rgba(40, 40, 40, 0.6);
       border-radius: 10px;
-      border-left: 3px solid #ff0000;
+      border-left: 3px solid #8B0000;
+      color: #8B0000;
     }
 
     .info-icon {
       font-size: 1.5rem;
-      color: #ffd700;
+      color: #FF4500;
       min-width: 30px;
     }
 
     .info-text h3 {
-      color: #ffd700;
+      color: #FF4500;
       margin-bottom: 5px;
       font-size: 1.2rem;
     }
 
     .info-text p {
-      color: #ccc;
+      color: #c96c6c;
       line-height: 1.5;
     }
 
     .footer {
       margin-top: 50px;
       text-align: center;
-      color: #888;
+      color: #555;
       font-size: 0.9rem;
       padding: 20px;
-      border-top: 1px solid rgba(255, 215, 0, 0.2);
+      border-top: 1px solid rgba(255, 69, 0, 0.2);
       width: 100%;
     }
 
@@ -281,8 +284,8 @@
       }
 
       .logo-img {
-        width: 120px;
-        height: 120px;
+        width: 180px;
+        height: 180px;
       }
     }
 
@@ -297,8 +300,8 @@
       }
 
       .logo-img {
-        width: 90px;
-        height: 90px;
+        width: 140px;
+        height: 140px;
       }
     }
   </style>
