@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora de Peso Ideal</title>
+</head>
+<body>
+  <h1>Calculadora de Peso Ideal</h1>
+  <form onsubmit="calcular(event)">
+    Idade: <input type="number" id="idade"><br>
+    Altura (m): <input type="number" step="0.01" id="altura"><br>
+    Peso (kg): <input type="number" id="peso"><br>
+    <button type="submit">Calcular</button>
+  </form>
+  <p id="resultado"></p>
+
+  <script>
+    function calcular(e) {
+      e.preventDefault();
+      const idade = parseInt(document.getElementById("idade").value);
+      const altura = parseFloat(document.getElementById("altura").value);
+      const peso = parseFloat(document.getElementById("peso").value);
+      const imc = peso / (altura * altura);
+      let mensagem = "";
+
+      if (idade < 18) {
+        mensagem = "Consulte um profissional de saúde.";
+      } else if (imc < 18.5) {
+        mensagem = "Abaixo do peso.";
+      } else if (imc < 25) {
+        mensagem = "Peso ideal.";
+      } else if (imc < 30) {
+        mensagem = "Sobrepeso.";
+      } else {
+        mensagem = "Obesidade.";
+      }
+
+      document.getElementById("resultado").innerText = `IMC: ${imc.toFixed(2)} - ${mensagem}`;
+    }
+  </script>
+</body>
+</html>
