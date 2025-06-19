@@ -74,7 +74,7 @@
       margin-top: 30px;
       font-size: 1.3rem;
       font-weight: bold;
-      min-height: 40px;
+      min-height: 60px;
     }
   </style>
 </head>
@@ -88,6 +88,9 @@
     <label for="altura">Altura (metros):</label>
     <input type="number" id="altura" step="0.01" min="0.5" max="2.5" required />
 
+    <label for="peso">Peso (kg):</label>
+    <input type="number" id="peso" step="0.1" min="10" max="300" required />
+
     <button type="submit">Calcular Peso Ideal</button>
   </form>
 
@@ -99,13 +102,9 @@
 
       const idade = parseInt(document.getElementById("idade").value);
       const altura = parseFloat(document.getElementById("altura").value);
+      const peso = parseFloat(document.getElementById("peso").value);
 
-      // Fórmula simplificada para peso ideal considerando altura e idade:
-      // Peso ideal base = 22 * altura^2 (IMC ideal médio 22)
-      // Ajuste para idade:  
-      // Se menor que 18 anos, diminui 10% do peso ideal (considerando fase crescimento)
-      // Entre 18 e 60, peso ideal normal
-      // Acima de 60 anos, diminui 5% (por perda muscular natural)
+      // Calcula peso ideal base pelo IMC 22 (médio saudável)
       let pesoIdealBase = 22 * altura * altura;
       let pesoIdeal;
 
@@ -117,15 +116,24 @@
         pesoIdeal = pesoIdealBase;
       }
 
-      // Como não tem peso informado, vamos só mostrar o peso ideal e a mensagem "Você está bem"
-      // para simplificar.
+      // Comparação do peso informado com peso ideal
+      const diferencaPercent = ((peso - pesoIdeal) / pesoIdeal) * 100;
 
-      // Se quiser, posso adicionar a comparação quando você informar o peso também.
+      let mensagem = `Peso ideal aproximado: ${pesoIdeal.toFixed(2)} kg.\n`;
 
-      const mensagem = "Seu peso ideal aproximado é " + pesoIdeal.toFixed(2) + " kg. Você está bem.";
+      if (diferencaPercent >= -5 && diferencaPercent <= 5) {
+        mensagem += "Você está bem.";
+      } else if (diferencaPercent > 5 && diferencaPercent <= 15) {
+        mensagem += "Você está um pouco acima do peso.";
+      } else if (diferencaPercent > 15) {
+        mensagem += "Você está muito acima do peso.";
+      } else if (diferencaPercent < -5) {
+        mensagem += "Você está abaixo do peso.";
+      }
 
       document.getElementById("resultado").innerText = mensagem;
     }
   </script>
 </body>
 </html>
+
