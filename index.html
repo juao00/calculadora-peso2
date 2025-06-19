@@ -29,6 +29,22 @@
       overflow-x: hidden;
     }
 
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(
+          circle at 20% 30%,
+          rgba(255, 0, 0, 0.1) 0%,
+          transparent 40%
+        ),
+        radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 40%);
+      z-index: -1;
+    }
+
     .container {
       max-width: 1200px;
       width: 100%;
@@ -38,48 +54,53 @@
     }
 
     .header-section {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
+      gap: 40px;
       margin-bottom: 20px;
-      padding: 20px;
     }
 
     .logo-img {
-      width: 200px;
-      height: 200px;
+      width: 150px;
+      height: 150px;
       object-fit: contain;
-      box-shadow: none;
+      border-radius: 0;
       border: none;
+      box-shadow: none;
       animation: none;
     }
 
     .title {
-      font-size: 3.5rem;
+      font-size: 4rem;
       font-weight: 900;
-      letter-spacing: 4px;
       text-transform: uppercase;
-      margin: 0;
+      letter-spacing: 4px;
+      position: relative;
+      line-height: 1;
       white-space: nowrap;
+      display: flex;
+      gap: 0.1em;
     }
 
+    /* Estilo para letras T vermelhas */
+    .title span {
+      color: white;
+    }
     .title span.t {
-      color: #8b0000;
-    }
-
-    .title span.other {
       color: #ff0000;
     }
 
     .subtitle {
       font-size: 1.5rem;
       color: #ffd700;
-      margin: 20px 0;
       text-align: center;
-      max-width: 800px;
+      max-width: 600px;
       line-height: 1.6;
+      margin-bottom: 40px;
+      margin-top: 0;
+      width: 100%;
     }
 
     .content {
@@ -90,10 +111,21 @@
       flex-wrap: wrap;
     }
 
-    .form-section, .info-section {
+    .form-section {
       background: rgba(30, 30, 30, 0.8);
       padding: 40px;
       border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+      width: 450px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .info-section {
+      background: rgba(30, 30, 30, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
       width: 450px;
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 215, 0, 0.3);
@@ -101,11 +133,24 @@
 
     .section-title {
       font-size: 1.8rem;
-      color: #ff0000;
+      color: #ffffff; /* branco */
       margin-bottom: 25px;
       text-align: center;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
       position: relative;
       padding-bottom: 10px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, #ff0000, #ffd700);
+      border-radius: 3px;
     }
 
     .form-group {
@@ -128,10 +173,12 @@
       outline: none;
       background: rgba(20, 20, 20, 0.7);
       color: #fff;
+      transition: all 0.3s ease;
     }
 
     input[type='number']:focus {
       border-color: #ff0000;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
     }
 
     button {
@@ -144,9 +191,21 @@
       border-radius: 8px;
       color: #ffd700;
       cursor: pointer;
+      transition: all 0.3s ease;
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-top: 10px;
+      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #ff4500 0%, #8b0000 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 0, 0, 0.6);
+    }
+
+    button:active {
+      transform: translateY(1px);
     }
 
     #resultado {
@@ -181,6 +240,7 @@
     .info-icon {
       font-size: 1.5rem;
       color: #ffd700;
+      min-width: 30px;
     }
 
     .info-text h3 {
@@ -191,6 +251,7 @@
 
     .info-text p {
       color: #ccc;
+      line-height: 1.5;
     }
 
     .footer {
@@ -202,6 +263,44 @@
       border-top: 1px solid rgba(255, 215, 0, 0.2);
       width: 100%;
     }
+
+    @media (max-width: 950px) {
+      .content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .form-section,
+      .info-section {
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .title {
+        font-size: 3rem;
+      }
+
+      .logo-img {
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .title {
+        font-size: 2.2rem;
+      }
+
+      .form-section,
+      .info-section {
+        padding: 25px;
+      }
+
+      .logo-img {
+        width: 90px;
+        height: 90px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -209,10 +308,12 @@
     <div class="header-section">
       <img src="titan.png" alt="Logo Esquerda" class="logo-img" />
       <h1 class="title">
-        <span class="other">I</span><span class="t">T</span><span class="other">A</span><span class="t">T</span><span class="other">A</span>N FORCE
+        <span class="t">T</span>i
+        <span class="t">T</span>an Force
       </h1>
       <img src="titan.png" alt="Logo Direita" class="logo-img" />
     </div>
+
     <p class="subtitle">
       Sua calculadora de peso ideal com base científica para uma vida mais saudável e equilibrada
     </p>
@@ -296,6 +397,7 @@
       const altura = parseFloat(document.getElementById('altura').value);
       const peso = parseFloat(document.getElementById('peso').value);
 
+      // Calcula peso ideal base pelo IMC 22 (médio saudável)
       let pesoIdealBase = 22 * altura * altura;
       let pesoIdeal;
 
@@ -307,10 +409,13 @@
         pesoIdeal = pesoIdealBase;
       }
 
+      // Comparação do peso informado com peso ideal
       const diferencaPercent = ((peso - pesoIdeal) / pesoIdeal) * 100;
       const diferencaAbs = Math.abs(peso - pesoIdeal).toFixed(1);
 
-      let mensagem = `<i class="fas fa-calculator"></i> Peso ideal aproximado: <strong>${pesoIdeal.toFixed(1)} kg</strong><br><br>`;
+      let mensagem = `<i class="fas fa-calculator"></i> Peso ideal aproximado: <strong>${pesoIdeal.toFixed(
+        1
+      )} kg</strong><br><br>`;
 
       if (diferencaPercent >= -5 && diferencaPercent <= 5) {
         mensagem += `<i class="fas fa-check-circle" style="color: #4caf50;"></i> Parabéns! Você está no peso ideal.`;
