@@ -2,99 +2,409 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TiTan Force</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #121212;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
       color: #f0f0f0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       min-height: 100vh;
-      margin: 0;
-      padding: 40px 20px;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    header {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 40px;
-      color: #ff6f00;
-      letter-spacing: 3px;
-      text-shadow: 0 0 10px #ff6f00;
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 0, 0, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 40%);
+      z-index: -1;
     }
 
-    form {
-      background: #1f1f1f;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #ff6f00aa;
+    .container {
+      max-width: 1200px;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      width: 320px;
+      align-items: center;
+    }
+
+    .header-section {
       text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      padding: 20px;
+      width: 100%;
+    }
+
+    .title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      color: #FF0000;
+      letter-spacing: 4px;
+      text-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+      position: relative;
+      text-transform: uppercase;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, #FF0000 0%, #FF8C00 50%, #FFD700 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+      animation: pulse 3s infinite;
+    }
+
+    .logo::before {
+      content: "TF";
+      font-size: 5rem;
+      font-weight: 900;
+      color: #000;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border: 3px solid #FFD700;
+      border-radius: 50%;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      color: #FFD700;
+      margin-bottom: 40px;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .content {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .form-section {
+      background: rgba(30, 30, 30, 0.8);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+      width: 450px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .info-section {
+      background: rgba(30, 30, 30, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+      width: 450px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      color: #FF0000;
+      margin-bottom: 25px;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, #FF0000, #FFD700);
+      border-radius: 3px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
     }
 
     label {
-      font-size: 1.1rem;
-      margin-bottom: 6px;
       display: block;
-      text-align: left;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #FFD700;
     }
 
     input[type="number"] {
       width: 100%;
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 6px;
-      border: none;
+      padding: 14px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      border: 2px solid #444;
       outline: none;
+      background: rgba(20, 20, 20, 0.7);
+      color: #FFF;
+      transition: all 0.3s ease;
+    }
+
+    input[type="number"]:focus {
+      border-color: #FF0000;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
     }
 
     button {
-      padding: 12px;
+      width: 100%;
+      padding: 16px;
       font-size: 1.2rem;
       font-weight: bold;
-      background-color: #ff6f00;
+      background: linear-gradient(135deg, #FF0000 0%, #B22222 100%);
       border: none;
       border-radius: 8px;
-      color: #121212;
+      color: #FFD700;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 10px;
+      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
     }
 
     button:hover {
-      background-color: #e65c00;
+      background: linear-gradient(135deg, #FF4500 0%, #8B0000 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 0, 0, 0.6);
+    }
+
+    button:active {
+      transform: translateY(1px);
     }
 
     #resultado {
       margin-top: 30px;
       font-size: 1.3rem;
       font-weight: bold;
-      min-height: 60px;
+      min-height: 80px;
+      background: rgba(20, 20, 20, 0.7);
+      border-radius: 10px;
+      padding: 20px;
+      border-left: 4px solid #FFD700;
+      color: #FFD700;
+      line-height: 1.6;
+    }
+
+    .info-content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 15px;
+      background: rgba(40, 40, 40, 0.6);
+      border-radius: 10px;
+      border-left: 3px solid #FF0000;
+    }
+
+    .info-icon {
+      font-size: 1.5rem;
+      color: #FFD700;
+      min-width: 30px;
+    }
+
+    .info-text h3 {
+      color: #FFD700;
+      margin-bottom: 5px;
+      font-size: 1.2rem;
+    }
+
+    .info-text p {
+      color: #CCC;
+      line-height: 1.5;
+    }
+
+    .footer {
+      margin-top: 50px;
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+      padding: 20px;
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+      width: 100%;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 20px rgba(255, 0, 0, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+      }
+    }
+
+    @media (max-width: 950px) {
+      .content {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .form-section, .info-section {
+        width: 100%;
+        max-width: 500px;
+      }
+      
+      .title {
+        font-size: 2.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .title {
+        font-size: 2.2rem;
+      }
+      
+      .form-section, .info-section {
+        padding: 25px;
+      }
+      
+      .logo {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .logo::before {
+        font-size: 3.5rem;
+      }
+      
+      .logo::after {
+        width: 135px;
+        height: 135px;
+      }
     }
   </style>
 </head>
 <body>
-  <header>TiTan Force</header>
-
-  <form id="formulario" onsubmit="calcularPesoIdeal(event)">
-    <label for="idade">Idade (anos):</label>
-    <input type="number" id="idade" min="1" max="120" required />
-
-    <label for="altura">Altura (metros):</label>
-    <input type="number" id="altura" step="0.01" min="0.5" max="2.5" required />
-
-    <label for="peso">Peso (kg):</label>
-    <input type="number" id="peso" step="0.1" min="10" max="300" required />
-
-    <button type="submit">Calcular Peso Ideal</button>
-  </form>
-
-  <p id="resultado"></p>
+  <div class="container">
+    <div class="header-section">
+      <h1 class="title">TiTan Force</h1>
+      <div class="logo-container">
+        <div class="logo"></div>
+      </div>
+      <p class="subtitle">Sua calculadora de peso ideal com base científica para uma vida mais saudável e equilibrada</p>
+    </div>
+    
+    <div class="content">
+      <div class="form-section">
+        <h2 class="section-title">Calculadora de Peso Ideal</h2>
+        <form id="formulario" onsubmit="calcularPesoIdeal(event)">
+          <div class="form-group">
+            <label for="idade"><i class="fas fa-birthday-cake"></i> Idade (anos):</label>
+            <input type="number" id="idade" min="1" max="120" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="altura"><i class="fas fa-ruler-vertical"></i> Altura (metros):</label>
+            <input type="number" id="altura" step="0.01" min="0.5" max="2.5" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="peso"><i class="fas fa-weight"></i> Peso (kg):</label>
+            <input type="number" id="peso" step="0.1" min="10" max="300" required />
+          </div>
+          
+          <button type="submit">
+            <i class="fas fa-calculator"></i> Calcular Peso Ideal
+          </button>
+        </form>
+        
+        <div id="resultado"></div>
+      </div>
+      
+      <div class="info-section">
+        <h2 class="section-title">Sobre o Peso Ideal</h2>
+        <div class="info-content">
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-heartbeat"></i></div>
+            <div class="info-text">
+              <h3>Saúde Cardiovascular</h3>
+              <p>Manter o peso ideal reduz o risco de doenças cardíacas, pressão alta e derrames, promovendo uma melhor saúde cardiovascular.</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-bone"></i></div>
+            <div class="info-text">
+              <h3>Saúde Articular</h3>
+              <p>O peso adequado diminui a pressão sobre as articulações, reduzindo o risco de artrite e dores nas costas e joelhos.</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-running"></i></div>
+            <div class="info-text">
+              <h3>Melhor Mobilidade</h3>
+              <p>Pessoas com peso ideal têm mais energia, melhor mobilidade e maior disposição para atividades físicas.</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-apple-alt"></i></div>
+            <div class="info-text">
+              <h3>Metabolismo Equilibrado</h3>
+              <p>O peso adequado ajuda a manter o metabolismo equilibrado, prevenindo diabetes tipo 2 e outras condições metabólicas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>© 2023 TiTan Force - Calculadora de Saúde. Todos os direitos reservados.</p>
+      <p>Esta ferramenta fornece estimativas com base em padrões científicos, mas não substitui a orientação de um profissional de saúde.</p>
+    </div>
+  </div>
 
   <script>
     function calcularPesoIdeal(e) {
@@ -118,22 +428,27 @@
 
       // Comparação do peso informado com peso ideal
       const diferencaPercent = ((peso - pesoIdeal) / pesoIdeal) * 100;
+      const diferencaAbs = Math.abs(peso - pesoIdeal).toFixed(1);
 
-      let mensagem = `Peso ideal aproximado: ${pesoIdeal.toFixed(2)} kg.\n`;
+      let mensagem = `<i class="fas fa-calculator"></i> Peso ideal aproximado: <strong>${pesoIdeal.toFixed(1)} kg</strong><br><br>`;
+      let icon = '';
 
       if (diferencaPercent >= -5 && diferencaPercent <= 5) {
-        mensagem += "Você está bem.";
+        mensagem += `<i class="fas fa-check-circle" style="color: #4CAF50;"></i> Parabéns! Você está no peso ideal.`;
+        icon = 'check-circle';
       } else if (diferencaPercent > 5 && diferencaPercent <= 15) {
-        mensagem += "Você está um pouco acima do peso.";
+        mensagem += `<i class="fas fa-exclamation-triangle" style="color: #FFD700;"></i> Você está um pouco acima do peso (${diferencaAbs} kg acima do ideal).`;
+        icon = 'exclamation-triangle';
       } else if (diferencaPercent > 15) {
-        mensagem += "Você está muito acima do peso.";
+        mensagem += `<i class="fas fa-exclamation-circle" style="color: #FF0000;"></i> Você está muito acima do peso (${diferencaAbs} kg acima do ideal).`;
+        icon = 'exclamation-circle';
       } else if (diferencaPercent < -5) {
-        mensagem += "Você está abaixo do peso.";
+        mensagem += `<i class="fas fa-info-circle" style="color: #FFD700;"></i> Você está abaixo do peso (${diferencaAbs} kg abaixo do ideal).`;
+        icon = 'info-circle';
       }
 
-      document.getElementById("resultado").innerText = mensagem;
+      document.getElementById("resultado").innerHTML = mensagem;
     }
   </script>
 </body>
 </html>
-
