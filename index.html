@@ -59,44 +59,55 @@
       position: relative;
       padding: 20px;
       width: 100%;
+      /* Novo: deixar flex para alinhar título e imagens na mesma linha */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     .title {
       font-size: 3.5rem;
       font-weight: 900;
-      margin-bottom: 20px;
       color: #ff0000;
       letter-spacing: 4px;
       text-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
       position: relative;
       text-transform: uppercase;
+      /* para manter a altura e alinhamento */
+      line-height: 1;
+      margin: 0;
+      white-space: nowrap;
     }
 
     .logo-container {
       display: flex;
       justify-content: center;
-      margin-bottom: 30px;
       gap: 20px;
     }
 
     .logo-img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
+      width: 80px; /* menor para ficar lado a lado com o título */
+      height: 80px;
       object-fit: contain;
-      box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
-      animation: pulse 3s infinite;
-      border: 3px solid #ffd700;
+      box-shadow: none; /* remove sombra */
+      animation: none; /* remove animação pulse */
+      border-radius: 0; /* remove borda arredondada */
+      border: none; /* remove borda */
     }
 
     .subtitle {
       font-size: 1.5rem;
       color: #ffd700;
-      margin-bottom: 40px;
+      margin-top: 20px;
       text-align: center;
       max-width: 600px;
       line-height: 1.6;
+      width: 100%;
     }
+
+    /* Mantive o restante do CSS igual */
 
     .content {
       display: flex;
@@ -299,8 +310,8 @@
       }
 
       .logo-img {
-        width: 150px;
-        height: 150px;
+        width: 60px;
+        height: 60px;
       }
     }
   </style>
@@ -313,10 +324,10 @@
         <img src="titan.png" alt="TiTan Force Logo" class="logo-img" />
         <img src="titan.png" alt="TiTan Force Logo" class="logo-img" />
       </div>
-      <p class="subtitle">
-        Sua calculadora de peso ideal com base científica para uma vida mais saudável e equilibrada
-      </p>
     </div>
+    <p class="subtitle">
+      Sua calculadora de peso ideal com base científica para uma vida mais saudável e equilibrada
+    </p>
 
     <div class="content">
       <div class="form-section">
